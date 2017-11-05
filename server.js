@@ -70,6 +70,11 @@ wss.on('connection', (ws) => {
     // Set up a callback for when a client closes the socket. This usually means they closed their browser.
     ws.on('close', () => {
         console.log(`Client disconnected (${wss.clients.size} users)`);
+        // Remove the old username from the userlist.
+        let oldIndex = arrUserList.indexOf('Anonymous');
+        if (oldIndex > -1){
+            arrUserList.splice(oldIndex, 1);
+        }
         updateUserList();
     });
 });
